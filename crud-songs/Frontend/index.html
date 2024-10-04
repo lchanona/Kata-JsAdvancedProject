@@ -1,50 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD Songs</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song CRUD</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1 class="my-4">CRUD Songs</h1>
-
-    <!-- Formulario para agregar canciones -->
-    <form id="song-form">
+    <h1 class="text-center mt-5">Song CRUD</h1>
+    <form id="song-form" class="container mt-5">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" placeholder="Title" required class="form-control">
+        </div>
         <div class="form-group">
             <label for="artist">Artist:</label>
-            <input type="text" id="artist" class="form-control" required>
+            <input type="text" id="artist" placeholder="Artist" required class="form-control">
         </div>
-      <div class="form-group">
-        <label for="title">song title:</label>
-        <input type="text" id="title" class="form-control" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="artist">Album:</label>
-        <input type="text" id="album" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Song</button>
+        <div class="form-group">
+            <label for="album">Album:</label>
+            <input type="text" id="album" placeholder="Album" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" id="year" placeholder="Year" required class="form-control">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add Song</button>
     </form>
+    <div id="song-list" class="container mt-5"></div>
 
-    <!-- Tabla para mostrar canciones -->
-    <h2 class="my-4">list of songs</h2>
-    <table class="table table-striped" id="song-list">
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Song title</th>
-          <th>Album</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Aquí se agregarán las canciones dinámicamente -->
-      </tbody>
-    </table>
-  </div> <!-- Closing div tag added -->
-  <script src="app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
