@@ -14,7 +14,7 @@ songForm.addEventListener('submit', async (e) => {
         title: document.getElementById('title').value,
         artist: document.getElementById('artist').value,
         album: document.getElementById('album').value,
-        year: document.getElementById('year').value,
+       
     };
 
     try {
@@ -54,14 +54,14 @@ function displaySongs(songs) {
         songItem.dataset.id = song.id;
         songItem.innerHTML = `
             <h3>${song.title} by ${song.artist}</h3>
-            <p>Album: ${song.album}, Year: ${song.year}</p>
+            <p>Album: ${song.album}, </p>
             <button onclick="deleteSong(${song.id})">Delete</button>
             <button onclick="updateSong(${song.id})">Update</button>
             <form id="update-form">
                 <input type="text" id="title" value="${song.title}">
                 <input type="text" id="artist" value="${song.artist}">
                 <input type="text" id="album" value="${song.album}">
-                <input type="number" id="year" value="${song.year}">
+                
                 <button type="submit">Update</button>
             </form>
         `;
@@ -93,18 +93,17 @@ async function updateSong(id) {
     const titleInput = songItem.querySelector('#title');
     const artistInput = songItem.querySelector('#artist');
     const albumInput = songItem.querySelector('#album');
-    const yearInput = songItem.querySelector('#year');
+    
 
     const newTitle = titleInput.value;
     const newArtist = artistInput.value;
     const newAlbum = albumInput.value;
-    const newYear = yearInput.value;
-
+    
     const songData = {
         title: newTitle,
         artist: newArtist,
         album: newAlbum,
-        year: newYear
+        
     };
 
     try {

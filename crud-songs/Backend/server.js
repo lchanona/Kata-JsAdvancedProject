@@ -16,7 +16,7 @@ app.post('/api/songs', (req, res) => {
         title: req.body.title,
         artist: req.body.artist,
         album: req.body.album,
-        year: req.body.year
+       
     };
     songs.push(song);
     res.status(201).json(song);
@@ -35,7 +35,6 @@ app.patch('/api/songs/:id', (req, res) => {
         song.title = req.body.title || song.title;
         song.artist = req.body.artist || song.artist;
         song.album = req.body.album || song.album;
-        song.year = req.body.year || song.year;
         res.status(200).json(song);
     } else {
         res.status(404).json({ message: 'Song not found' });
