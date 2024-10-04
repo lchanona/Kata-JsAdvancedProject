@@ -1,28 +1,61 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
+app.use(bodyParser.json());
+app.use(cors());
 
-app.use(express.json());
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+// Temporary in-memory storage
+let songs = [];
 
-app.use(express.static('frontend'));
-
-const songs = []; // temporary storage for songs
-
-app.get('/api/songs', (req, res) => {
-  res.json(songs);
-});
-
+// Create (POST)
 app.post('/api/songs', (req, res) => {
-  const { artist, title, album } = req.body;
-  const newSong = { artist, title, album };
-  songs.push(newSong);
-  res.json(newSong);
+    const song = {
+        id: Date.now(),
+        title: req.body.title,
+        artist: req.body.artist,
+        album: req.body.album,
+        year: req.body.year
+    };
+    songs.push(song);
+    res.status(201).json(song);
 });
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+// Read (GET)
+app.get('/api/songs', (req, res) => {
+    res.status(200).json(songs);
+});
+
+// Update (PUT or PATCH)
+app.patch('/api/songs/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const song = songs.find(s => s.id === id);
+    if (song) {
+        song.title = req.body.title || song.title;
+        song.artist = req.body.artist || song.artist;
+        song.album = req.body.album || song.album;
+        song.year = req.body.year || song.year;
+        res.status(200).json(song);
+    } else {
+        res.status(404).json({ message: 'Song not found' });
+    }
+});
+
+// Delete (DELETE)
+app.delete('/api/songs/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    songs = songs.filter(song => song.id !== id);
+    res.status(200).json({ message: 'Song deleted' });
+});
+
+// Add a route to handle the root URL ("/")
+app.get('/', (req, res) => {
+    res.send('Welcome to my song app!');
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
