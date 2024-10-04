@@ -98,12 +98,13 @@ async function updateSong(id) {
     const newTitle = titleInput.value;
     const newArtist = artistInput.value;
     const newAlbum = albumInput.value;
-    
+    const newYear = yearInput.value;
+
     const songData = {
         title: newTitle,
         artist: newArtist,
         album: newAlbum,
-        
+        year: newYear
     };
 
     try {
