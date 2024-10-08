@@ -14,7 +14,6 @@ songForm.addEventListener('submit', async (e) => {
         title: document.getElementById('title').value,
         artist: document.getElementById('artist').value,
         album: document.getElementById('album').value,
-       
     };
 
     try {
@@ -49,22 +48,26 @@ async function fetchSongs() {
 // Display songs in the DOM
 function displaySongs(songs) {
     songList.innerHTML = '';
-    songs.forEach(song => {
+    songs.forEach((song) => {
         const songItem = document.createElement('div');
         songItem.dataset.id = song.id;
-        songItem.innerHTML = `
-            <h3>${song.title} by ${song.artist}</h3>
-            <p>Album: ${song.album}, </p>
+
+        const titleElement = `<h3>${song.title} by ${song.artist}</h3>`;
+        const albumElement = `<p>Album: ${song.album}</p>`;
+        const buttons = `
             <button onclick="deleteSong(${song.id})">Delete</button>
             <button onclick="updateSong(${song.id})">Update</button>
+        `;
+        const updateForm = `
             <form id="update-form">
                 <input type="text" id="title" value="${song.title}">
                 <input type="text" id="artist" value="${song.artist}">
                 <input type="text" id="album" value="${song.album}">
                 
-                <button type="submit">Update</button>
             </form>
         `;
+
+        songItem.innerHTML = `${titleElement}${albumElement}${buttons}${updateForm}`;
         songList.appendChild(songItem);
     });
 }
@@ -93,18 +96,15 @@ async function updateSong(id) {
     const titleInput = songItem.querySelector('#title');
     const artistInput = songItem.querySelector('#artist');
     const albumInput = songItem.querySelector('#album');
-    
 
     const newTitle = titleInput.value;
     const newArtist = artistInput.value;
     const newAlbum = albumInput.value;
-    const newYear = yearInput.value;
 
     const songData = {
         title: newTitle,
         artist: newArtist,
         album: newAlbum,
-        year: newYear
     };
 
     try {

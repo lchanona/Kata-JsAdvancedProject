@@ -10,14 +10,17 @@
 <body>
     <h1 class="text-center mt-5">Songs CRUD</h1>
     <form id="song-form" class="container mt-5">
+
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" id="title" placeholder="Title" required class="form-control">
         </div>
+
         <div class="form-group">
             <label for="artist">Artist:</label>
             <input type="text" id="artist" placeholder="Artist" required class="form-control">
         </div>
+
         <div class="form-group">
             <label for="album">Album:</label>
             <input type="text" id="album" placeholder="Album" required class="form-control">
@@ -25,6 +28,7 @@
         
         <button type="submit" class="btn btn-primary">Add Song</button>
     </form>
+    
     <div id="song-list" class="container mt-5">
         <table id="songs-table" class="table table-striped">
             <thead>
